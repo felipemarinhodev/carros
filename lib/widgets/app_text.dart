@@ -37,8 +37,14 @@ class AppText extends StatelessWidget {
           FocusScope.of(context).requestFocus(nextFocus);
         }
       },
-      style: TextStyle(fontSize: 25, color: Colors.blue),
+      style: TextStyle(
+        fontSize: 25,
+        color: Colors.blue,
+      ),
       decoration: InputDecoration(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16)
+        ),
           labelText: label,
           labelStyle: TextStyle(fontSize: 25, color: Colors.grey),
           hintText: hint,
