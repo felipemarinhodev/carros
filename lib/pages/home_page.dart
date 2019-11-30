@@ -22,8 +22,22 @@ class HomePage extends StatelessWidget {
       future: future,
       builder: (context, snapshot) {
 
-        if (! snapshot.hasData) {
-          return Center(child: CircularProgressIndicator(),);
+        if (snapshot.hasError) {
+          return Center(
+            child: Text(
+              'Não foi possível buscar os carros',
+              style: TextStyle(
+                color: Colors.red,
+                fontSize: 25
+              ),
+            ),
+          );
+        }
+
+        if (!snapshot.hasData) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
         }
 
         List<Carro> carros = snapshot.data;
@@ -36,53 +50,53 @@ class HomePage extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(16),
       child: ListView.builder(
-        itemCount: carros != null ? carros.length : 0,
-        itemBuilder: (context, index) {
-          Carro c = carros[index];
-    
-          return Card(
-            color: Colors.grey[100],
-            child: Container(
-              padding: EdgeInsets.all(10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Center(
-                    child: Image.network(
-                      c.urlFoto,
-                      width: 250,
+          itemCount: carros != null ? carros.length : 0,
+          itemBuilder: (context, index) {
+            Carro c = carros[index];
+
+            return Card(
+              color: Colors.grey[100],
+              child: Container(
+                padding: EdgeInsets.all(10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Center(
+                      child: Image.network(
+                        c.urlFoto,
+                        width: 250,
+                      ),
                     ),
-                  ),
-                  Text(
-                    c.nome,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(fontSize: 25),
-                  ),
-                  Text(
-                    'Descrição...',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  ButtonTheme.bar(
-                    // make buttons use the appropriate styles for cards
-                    child: ButtonBar(
-                      children: <Widget>[
-                        FlatButton(
-                          child: const Text('DETALHES'),
-                          onPressed: () {/* ... */},
-                        ),
-                        FlatButton(
-                          child: const Text('SHARE'),
-                          onPressed: () {/* ... */},
-                        ),
-                      ],
+                    Text(
+                      c.nome,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(fontSize: 25),
                     ),
-                  ),
-                ],
+                    Text(
+                      'Descrição...',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    ButtonTheme.bar(
+                      // make buttons use the appropriate styles for cards
+                      child: ButtonBar(
+                        children: <Widget>[
+                          FlatButton(
+                            child: const Text('DETALHES'),
+                            onPressed: () {/* ... */},
+                          ),
+                          FlatButton(
+                            child: const Text('SHARE'),
+                            onPressed: () {/* ... */},
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          );
-        }),
+            );
+          }),
     );
   }
 }
