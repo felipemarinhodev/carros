@@ -63,7 +63,8 @@ class HomePage extends StatelessWidget {
                   children: <Widget>[
                     Center(
                       child: Image.network(
-                        c.urlFoto,
+                        c.urlFoto ??
+                       "http://www.livroandroid.com.br/livro/carros/classicos/Ford_Mustang.png",
                         width: 250,
                       ),
                     ),

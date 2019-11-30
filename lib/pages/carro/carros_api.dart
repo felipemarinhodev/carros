@@ -4,19 +4,26 @@ import 'dart:convert' as convert;
 
 class CarrosApi {
   static Future<List<Carro>> getCarros() async {
-    // try {
-      var url = 'http://carros-springboot.herokuapp.com/api/v1/carros';
+    var url = 'http://carros-springboot.herokuapp.com/api/v1/carros';
 
-      var response = await http.get(url);
+    print('GET > $url');
 
-      String json = response.body;
+    var response = await http.get(url);
 
-      List mapResponse = convert.json.decode(json);
+    String json = response.body;
+    print(json);
 
-      return [];
+    List list = convert.json.decode(json);
+
+    final carros = List<Carro>();
+
+    for(Map map in list) {
+      Carro c = Carro.fromJson(map);
+      if (c.nome != null) {
+        carros.add(c);
+      }
+    }
     
-    // } catch (error) {
-    //   print(error);
-    // }
+    return carros;
   }
 }
