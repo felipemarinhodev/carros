@@ -3,7 +3,12 @@ import 'package:carros/pages/carro/carros_api.dart';
 import 'package:carros/pages/carro/carros_listview.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin<HomePage>  {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -26,6 +31,4 @@ class HomePage extends StatelessWidget {
           ),
     );
   }
-
-  
 }

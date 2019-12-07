@@ -13,11 +13,9 @@ class CarrosApi {
 
     print('GET > $url');
 
-
     var response = await http.get(url);
 
     String json = response.body;
-    print(json);
 
     List list = convert.json.decode(json);
     final carros = list.map<Carro>((map) => Carro.fromJson(map)).toList();
